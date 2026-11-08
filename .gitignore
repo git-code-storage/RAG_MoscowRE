@@ -1,0 +1,30 @@
+# Переменные окружения
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*env/
+
+# IDE
+.idea/
+.ipynb_checkpoints/
+
+# Данные и модели
+backup/
+
+# Логи
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MLFlow
+mlruns/
+mlflow.db
+
+# База данных
+db/

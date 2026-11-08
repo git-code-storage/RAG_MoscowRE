@@ -1,0 +1,36 @@
+name: RAG_MoscowRE_v_1
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    command: "export MLFLOW_ALLOW_FILE_STORE=true && python base_pipeline.py --model {model} --test_path {test_path} --chunks {chunks}"
+    parameters:
+      model: {type: string, default: "GigaChat-2"}
+      test_path: {type: string, default: "raw_data/questions_lite.jsonl"}
+      chunks: {type: int, default: 500}
+      emb: {type: string, default: "se"}
+
+
+  gibrid:
+    command: "export MLFLOW_ALLOW_FILE_STORE=true && python gibrid_pipeline.py --model {model} --test_path {test_path}  --weight_vect {weight_vect} --const_rrf {const_rrf} --with_lema {with_lema} --chunks {chunks}"
+    parameters:
+      model: {type: string, default: "GigaChat-2"}
+      test_path: {type: string, default: "raw_data/questions_lite.jsonl"}
+      weight_vect: {type: float, default: 1.0}
+      const_rrf: {type: int, default: 60}
+      with_lema: {type: string, default: "True"}
+      chunks: {type: int, default: 500}
+      emb: {type: string, default: "se"}
+
+  ce:
+    command: "export MLFLOW_ALLOW_FILE_STORE=true && python ce_pipeline.py --model {model} --test_path {test_path}"
+    parameters:
+      model: {type: string, default: "GigaChat-2"}
+      test_path: {type: string, default: "raw_data/questions_lite.jsonl"}
+
+  wf:
+    command: "export MLFLOW_ALLOW_FILE_STORE=true && without_filters_pipeline.py --model {model} --test_path {test_path}"
+    parameters:
+      model: {type: string, default: "GigaChat-2"}
+      test_path: {type: string, default: "raw_data/questions_lite.jsonl"}
